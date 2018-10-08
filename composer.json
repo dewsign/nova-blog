@@ -9,9 +9,15 @@
             "email": "m2de@outlook.com"
         }
     ],
+    "minimum-stability": "dev",
     "require": {
         "php": ">=7.0.0",
-        "laravel/framework": ">=5.0.0"
+        "laravel/framework": ">=5.0.0",
+        "maxfactor/support": "^1.4",
+        "benjaminhirsch/nova-slug-field": "^1.0",
+        "silvanite/nova-field-cloudinary": "^1.0",
+        "dewsign/nova-repeater-blocks": "dev-master",
+        "epartment/nova-dependency-container": "dev-master"
     },
     "require-dev": {
         "squizlabs/php_codesniffer": ">=3.1"

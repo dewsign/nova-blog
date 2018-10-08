@@ -2,8 +2,13 @@
 
 namespace Dewsign\NovaBlog\Providers;
 
+use Laravel\Nova\Nova;
 use Illuminate\Routing\Router;
+use Dewsign\NovaBlog\Models\Article;
+use Dewsign\NovaBlog\Nova\Repeaters;
+use Dewsign\NovaBlog\Models\Category;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Database\Eloquent\Relations\Relation;
 
 class PackageServiceProvider extends ServiceProvider
 {
@@ -14,11 +19,13 @@ class PackageServiceProvider extends ServiceProvider
      */
     public function boot(Router $router)
     {
+        $this->publishConfigs();
         $this->bootViews();
         $this->bootAssets();
         $this->bootCommands();
         $this->publishDatabaseFiles();
-        $this->registerMiddleware();
+        $this->registerWebRoutes();
+        $this->registerMorphMaps();
     }
 
     /**
@@ -28,7 +35,36 @@ class PackageServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        Nova::resources([
+            Repeaters::class,
+        ]);
+
+        $this->mergeConfigFrom(
+            $this->getConfigsPath(),
+            'novablog'
+        );
+    }
+
+    /**
+     * Publish configuration file.
+     *
+     * @return void
+     */
+    private function publishConfigs()
+    {
+        $this->publishes([
+            $this->getConfigsPath() => config_path('novablog.php'),
+        ], 'config');
+    }
+
+    /**
+     * Get local package configuration path.
+     *
+     * @return string
+     */
+    private function getConfigsPath()
+    {
+        return __DIR__.'/../Config/novablog.php';
     }
 
     /**
@@ -52,9 +88,9 @@ class PackageServiceProvider extends ServiceProvider
      */
     private function bootViews()
     {
-        $this->loadViewsFrom(__DIR__.'/../Resources/views', 'dewsign');
+        $this->loadViewsFrom(__DIR__.'/../Resources/views', 'nova-blog');
         $this->publishes([
-            __DIR__.'/../Resources/views' => resource_path('views/vendor/dewsign'),
+            __DIR__.'/../Resources/views' => resource_path('views/vendor/nova-blog'),
         ]);
     }
 
@@ -66,19 +102,8 @@ class PackageServiceProvider extends ServiceProvider
     private function bootAssets()
     {
         $this->publishes([
-            __DIR__.'/../Resources/assets/js' => resource_path('assets/js/vendor/dewsign'),
+            __DIR__.'/../Resources/assets/js' => resource_path('assets/js/vendor/nova-blog'),
         ], 'js');
-    }
-
-    /**
-     * Make middleware available to routes
-     *
-     * @param Router $router
-     * @return void
-     */
-    private function registerMiddleware(Router $router)
-    {
-        // $router->aliasMiddleware('name', MyMiddleware::class);
     }
 
     private function publishDatabaseFiles()
@@ -100,5 +125,28 @@ class PackageServiceProvider extends ServiceProvider
         $this->publishes([
             __DIR__ . '/../Database/seeds' => base_path('database/seeds')
         ], 'seeds');
+    }
+
+    /**
+     * Load Web Routes into the application
+     *
+     * @return void
+     */
+    private function registerWebRoutes()
+    {
+        $this->loadRoutesFrom(__DIR__.'/../Routes/web.php');
+    }
+
+    /**
+     * Register the Mophmaps
+     *
+     * @return void
+     */
+    private function registerMorphmaps()
+    {
+        Relation::morphMap([
+            'novablog.article' => Article::class,
+            'novablog.category' => Category::class,
+        ]);
     }
 }
