@@ -55,6 +55,21 @@ class Article extends Model
         return $this->categories->first();
     }
 
+    public function getFeaturedImageLargeAttribute()
+    {
+        if (!$this->image) {
+            return null;
+        }
+
+        return cloudinary_image($this->image, [
+            "width" => 800,
+            "height" => 450,
+            "crop" => "fill",
+            "gravity" => "auto",
+            "fetch_format" => "auto",
+        ]);
+    }
+
     /**
      * Add required items to the breadcrumb seed
      *

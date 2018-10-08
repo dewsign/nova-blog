@@ -34,7 +34,8 @@ class BlogController extends Controller
             'nova-blog::index',
         ])
         ->with('articles', $articles)
-        ->with('categories', $categories);
+        ->with('categories', $categories)
+        ->with('page', []);
     }
 
     /**
