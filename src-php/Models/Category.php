@@ -9,6 +9,7 @@ use Maxfactor\Support\Model\Traits\HasSortOrder;
 use Maxfactor\Support\Model\Traits\CanBeFeatured;
 use Maxfactor\Support\Model\Traits\HasActiveState;
 use Maxfactor\Support\Webpage\Traits\HasMetaAttributes;
+use Maxfactor\Support\Webpage\Traits\MustHaveCanonical;
 use Dewsign\NovaRepeaterBlocks\Traits\HasRepeaterBlocks;
 
 class Category extends Model implements Sortable
@@ -19,6 +20,7 @@ class Category extends Model implements Sortable
     use HasActiveState;
     use HasMetaAttributes;
     use HasRepeaterBlocks;
+    use MustHaveCanonical;
 
     /**
      * The attributes that are mass assignable.

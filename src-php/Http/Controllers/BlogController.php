@@ -23,7 +23,7 @@ class BlogController extends Controller
     {
         $articles = Article::includeRepeaters()->active()
             ->orderBy('published_date', 'desc')
-            ->paginate(12);
+            ->paginate(config('novablog.pageSize', 12));
 
         $categories = Category::has('articles')
             ->active()
@@ -35,7 +35,9 @@ class BlogController extends Controller
         ])
         ->with('articles', $articles)
         ->with('categories', $categories)
-        ->with('page', []);
+        ->with('page', [
+            'canonical' => route('blog.index')
+        ]);
     }
 
     /**
@@ -62,7 +64,8 @@ class BlogController extends Controller
         ])
         ->with('page', $category)
         ->with('articles', $articles)
-        ->with('categories', $categories);
+        ->with('categories', $categories)
+        ->with('category', $category);
     }
 
     /**

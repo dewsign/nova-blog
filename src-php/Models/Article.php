@@ -3,10 +3,12 @@
 namespace Dewsign\NovaBlog\Models;
 
 use Maxfactor\Support\Webpage\Model;
+use Illuminate\Support\Facades\Route;
 use Maxfactor\Support\Webpage\Traits\HasSlug;
 use Maxfactor\Support\Model\Traits\CanBeFeatured;
 use Maxfactor\Support\Model\Traits\HasActiveState;
 use Maxfactor\Support\Webpage\Traits\HasMetaAttributes;
+use Maxfactor\Support\Webpage\Traits\MustHaveCanonical;
 use Dewsign\NovaRepeaterBlocks\Traits\HasRepeaterBlocks;
 
 class Article extends Model
@@ -16,6 +18,7 @@ class Article extends Model
     use HasActiveState;
     use HasMetaAttributes;
     use HasRepeaterBlocks;
+    use MustHaveCanonical;
 
     /**
      * The attributes that are mass assignable.
@@ -77,19 +80,26 @@ class Article extends Model
      */
     public function seeds()
     {
+        $category = Category::whereSlug(Route::input('category'))->first();
+
         return array_merge(parent::seeds(), [
             [
                 'name' => __('Blog'),
                 'url' => route('blog.index'),
             ],
             [
-                'name' => $this->primaryCategory->navTitle,
-                'url' => route('blog.list', [$this->primaryCategory]),
+                'name' => array_get($category ?? $this->primaryCategory, 'navTitle'),
+                'url' => route('blog.list', [$category ?? $this->primaryCategory]),
             ],
             [
                 'name' => $this->navTitle,
-                'url' => route('blog.show', [$this->primaryCategory, $this]),
+                'url' => route('blog.show', [$category ?? $this->primaryCategory, $this]),
             ],
         ]);
+    }
+
+    public function baseCanonical()
+    {
+        return route('blog.show', [$this->primaryCategory, $this]);
     }
 }

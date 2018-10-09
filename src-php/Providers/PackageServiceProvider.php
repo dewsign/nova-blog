@@ -6,6 +6,7 @@ use Laravel\Nova\Nova;
 use Illuminate\Routing\Router;
 use Dewsign\NovaBlog\Models\Article;
 use Dewsign\NovaBlog\Nova\Repeaters;
+use Illuminate\Pagination\Paginator;
 use Dewsign\NovaBlog\Models\Category;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Database\Eloquent\Relations\Relation;
@@ -26,6 +27,8 @@ class PackageServiceProvider extends ServiceProvider
         $this->publishDatabaseFiles();
         $this->registerWebRoutes();
         $this->registerMorphMaps();
+        $this->configurePagination();
+        $this->loadTranslations();
     }
 
     /**
@@ -148,5 +151,20 @@ class PackageServiceProvider extends ServiceProvider
             'novablog.article' => Article::class,
             'novablog.category' => Category::class,
         ]);
+    }
+
+    /**
+     * Set te default pagination to not use bootstrap markup
+     *
+     * @return void
+     */
+    private function configurePagination()
+    {
+        Paginator::defaultView('pagination::default');
+    }
+
+    private function loadTranslations()
+    {
+        $this->loadJSONTranslationsFrom(__DIR__.'/../Resources/lang', 'novablog');
     }
 }

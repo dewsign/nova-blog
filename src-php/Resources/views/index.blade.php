@@ -1,9 +1,5 @@
 <h2>@lang('Articles')</h2>
-<ul>
-    @foreach($articles as $article)
-        <li><a href="{{ route('blog.show', [$article->primaryCategory, $article]) }}">{{ $article->navTitle }}</a></li>
-    @endforeach
-</ul>
+@include('nova-blog::article-list')
 
 <h2>@lang('Categories')</h2>
 <ul>
