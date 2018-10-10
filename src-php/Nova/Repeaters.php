@@ -7,6 +7,7 @@ use Dewsign\NovaBlog\Nova\Article;
 use Dewsign\NovaBlog\Nova\Category;
 use Dewsign\NovaRepeaterBlocks\Fields\Repeater;
 use Dewsign\NovaRepeaterBlocks\Repeaters\Common\Blocks\TextBlock;
+use Dewsign\NovaRepeaterBlocks\Repeaters\Common\Blocks\ImageBlock;
 use Dewsign\NovaRepeaterBlocks\Repeaters\Common\Blocks\TextareaBlock;
 
 class Repeaters extends Repeater
@@ -23,6 +24,7 @@ class Repeaters extends Repeater
         return [
             TextBlock::class,
             TextareaBlock::class,
+            ImageBlock::class,
         ];
     }
 }
