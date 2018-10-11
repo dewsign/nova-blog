@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Dewsign\NovaBlog\Nova\Article;
 use Dewsign\NovaBlog\Nova\Category;
 use Dewsign\NovaRepeaterBlocks\Fields\Repeater;
+use Dewsign\NovaRepeaterBlocks\Repeaters\Common\Blocks\CustomViewBlock;
 use Dewsign\NovaRepeaterBlocks\Repeaters\Common\Blocks\TextBlock;
 use Dewsign\NovaRepeaterBlocks\Repeaters\Common\Blocks\ImageBlock;
 use Dewsign\NovaRepeaterBlocks\Repeaters\Common\Blocks\TextareaBlock;
@@ -22,9 +23,10 @@ class Repeaters extends Repeater
     public function types(Request $request)
     {
         return [
+            CustomViewBlock::class,
+            ImageBlock::class,
             TextBlock::class,
             TextareaBlock::class,
-            ImageBlock::class,
         ];
     }
 }
