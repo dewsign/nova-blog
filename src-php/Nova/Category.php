@@ -9,10 +9,10 @@ use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Fields\Boolean;
 use Laravel\Nova\Fields\HasMany;
 use Laravel\Nova\Fields\MorphMany;
-use Dewsign\NovaBlog\Nova\Repeaters;
 use Naxon\NovaFieldSortable\Sortable;
 use Benjaminhirsch\NovaSlugField\Slug;
 use Laravel\Nova\Fields\BelongsToMany;
+use Dewsign\NovaBlog\Nova\BlogRepeaters;
 use Laravel\Nova\Http\Requests\NovaRequest;
 use Benjaminhirsch\NovaSlugField\TextWithSlug;
 use Maxfactor\Support\Webpage\Nova\MetaAttributes;
@@ -74,7 +74,7 @@ class Category extends Resource
             CloudinaryImage::make('Image'),
             Sortable::make('Sort Order', 'id'),
             HasMany::make('Articles'),
-            MorphMany::make(__('Repeaters'), 'repeaters', Repeaters::class),
+            MorphMany::make(__('Repeaters'), 'repeaters', BlogRepeaters::class),
             MetaAttributes::make(),
         ];
     }
