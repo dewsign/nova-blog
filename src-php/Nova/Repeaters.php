@@ -10,6 +10,7 @@ use Dewsign\NovaRepeaterBlocks\Repeaters\Common\Blocks\CustomViewBlock;
 use Dewsign\NovaRepeaterBlocks\Repeaters\Common\Blocks\TextBlock;
 use Dewsign\NovaRepeaterBlocks\Repeaters\Common\Blocks\ImageBlock;
 use Dewsign\NovaRepeaterBlocks\Repeaters\Common\Blocks\TextareaBlock;
+use Dewsign\NovaRepeaterBlocks\Repeaters\Common\Blocks\MarkdownBlock;
 
 class Repeaters extends Repeater
 {
@@ -27,6 +28,7 @@ class Repeaters extends Repeater
             ImageBlock::class,
             TextBlock::class,
             TextareaBlock::class,
+            MarkdownBlock::class,
         ];
     }
 }
