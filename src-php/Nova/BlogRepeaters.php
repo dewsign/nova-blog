@@ -6,8 +6,11 @@ use Illuminate\Http\Request;
 use Dewsign\NovaBlog\Nova\Article;
 use Dewsign\NovaBlog\Nova\Category;
 use Dewsign\NovaRepeaterBlocks\Fields\Repeater;
+use Dewsign\NovaRepeaterBlocks\Repeaters\Common\Blocks\CustomViewBlock;
 use Dewsign\NovaRepeaterBlocks\Repeaters\Common\Blocks\TextBlock;
+use Dewsign\NovaRepeaterBlocks\Repeaters\Common\Blocks\ImageBlock;
 use Dewsign\NovaRepeaterBlocks\Repeaters\Common\Blocks\TextareaBlock;
+use Dewsign\NovaRepeaterBlocks\Repeaters\Common\Blocks\MarkdownBlock;
 
 class BlogRepeaters extends Repeater
 {
@@ -25,8 +28,11 @@ class BlogRepeaters extends Repeater
         }
 
         return array_merge([
+            CustomViewBlock::class,
+            ImageBlock::class,
             TextBlock::class,
             TextareaBlock::class,
+            MarkdownBlock::class,
         ], config('novablog.repeaters'));
     }
 }
