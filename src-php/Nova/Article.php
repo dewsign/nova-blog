@@ -12,10 +12,10 @@ use Laravel\Nova\Fields\HasMany;
 use Laravel\Nova\Fields\DateTime;
 use Laravel\Nova\Fields\Textarea;
 use Laravel\Nova\Fields\MorphMany;
-use Dewsign\NovaBlog\Nova\Repeaters;
 use Naxon\NovaFieldSortable\Sortable;
 use Benjaminhirsch\NovaSlugField\Slug;
 use Laravel\Nova\Fields\BelongsToMany;
+use Dewsign\NovaBlog\Nova\BlogRepeaters;
 use Laravel\Nova\Http\Requests\NovaRequest;
 use Benjaminhirsch\NovaSlugField\TextWithSlug;
 use Maxfactor\Support\Webpage\Nova\MetaAttributes;
@@ -74,7 +74,7 @@ class Article extends Resource
             CloudinaryImage::make('Image'),
             Textarea::make('Summary'),
             BelongsToMany::make('Categories'),
-            MorphMany::make(__('Repeaters'), 'repeaters', Repeaters::class),
+            MorphMany::make(__('Repeaters'), 'repeaters', BlogRepeaters::class),
             MetaAttributes::make(),
         ];
     }

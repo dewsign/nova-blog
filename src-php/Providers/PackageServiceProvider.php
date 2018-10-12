@@ -5,10 +5,10 @@ namespace Dewsign\NovaBlog\Providers;
 use Laravel\Nova\Nova;
 use Illuminate\Routing\Router;
 use Dewsign\NovaBlog\Models\Article;
-use Dewsign\NovaBlog\Nova\Repeaters;
 use Illuminate\Pagination\Paginator;
 use Dewsign\NovaBlog\Models\Category;
 use Illuminate\Support\ServiceProvider;
+use Dewsign\NovaBlog\Nova\BlogRepeaters;
 use Illuminate\Database\Eloquent\Relations\Relation;
 
 class PackageServiceProvider extends ServiceProvider
@@ -39,7 +39,7 @@ class PackageServiceProvider extends ServiceProvider
     public function register()
     {
         Nova::resources([
-            Repeaters::class,
+            BlogRepeaters::class,
         ]);
 
         $this->mergeConfigFrom(
