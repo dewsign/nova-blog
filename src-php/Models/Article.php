@@ -2,6 +2,7 @@
 
 namespace Dewsign\NovaBlog\Models;
 
+use ScoutElastic\Searchable;
 use Maxfactor\Support\Webpage\Model;
 use Illuminate\Support\Facades\Route;
 use Maxfactor\Support\Webpage\Traits\HasSlug;
@@ -10,15 +11,55 @@ use Maxfactor\Support\Model\Traits\HasActiveState;
 use Maxfactor\Support\Webpage\Traits\HasMetaAttributes;
 use Maxfactor\Support\Webpage\Traits\MustHaveCanonical;
 use Dewsign\NovaRepeaterBlocks\Traits\HasRepeaterBlocks;
+use Dewsign\NovaBlog\IndexConfigurators\BlogIndexConfigurator;
 
 class Article extends Model
 {
     use HasSlug;
+    use Searchable;
     use CanBeFeatured;
     use HasActiveState;
     use HasMetaAttributes;
     use HasRepeaterBlocks;
     use MustHaveCanonical;
+
+    protected $indexConfigurator = BlogIndexConfigurator::class;
+
+    // Mapping for a model fields.
+    protected $mapping = [
+        'properties' => [
+            'text' => [
+                'type' => 'text',
+                'fields' => [
+                    'raw' => [
+                        'type' => 'keyword',
+                    ]
+                ]
+            ],
+        ]
+    ];
+
+    /**
+     * Get the indexable data array for the model.
+     *
+     * @return array
+     */
+    public function toSearchableArray()
+    {
+        $this->repeaters;
+        $searchable = $this->toArray();
+
+        $searchable = array_except($searchable, [
+            'active',
+            'browser_title',
+            'h1',
+            'meta_description',
+            'nav_title',
+            'canonical',
+        ]);
+
+        return $searchable;
+    }
 
     /**
      * The attributes that are mass assignable.
