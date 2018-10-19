@@ -12,6 +12,7 @@ use Laravel\Nova\Fields\MorphMany;
 use Benjaminhirsch\NovaSlugField\Slug;
 use Laravel\Nova\Fields\BelongsToMany;
 use Dewsign\NovaFieldSortable\Sortable;
+use Dewsign\NovaFieldSortable\IsSorted;
 use Dewsign\NovaBlog\Nova\BlogRepeaters;
 use Laravel\Nova\Http\Requests\NovaRequest;
 use Benjaminhirsch\NovaSlugField\TextWithSlug;
@@ -20,7 +21,7 @@ use Silvanite\NovaFieldCloudinary\Fields\CloudinaryImage;
 
 class Category extends Resource
 {
-    public static $defaultSortField = 'sort_order';
+    use IsSorted;
 
     /**
      * The model the resource corresponds to.
@@ -63,7 +64,7 @@ class Category extends Resource
     public function fields(Request $request)
     {
         return [
-            Sortable::make('Sort Order', 'id'),
+            Sortable::make('Sort', 'id'),
             ID::make(),
             Boolean::make('Active')->rules('required', 'boolean'),
             Boolean::make('Featured')->rules('required', 'boolean'),
