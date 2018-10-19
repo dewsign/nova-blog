@@ -20,7 +20,8 @@
         "dewsign/nova-repeater-blocks": "dev-master",
         "epartment/nova-dependency-container": "^1.1",
         "silvanite/brandenburg": "^1.0",
-        "babenkoivan/scout-elasticsearch-driver": "^3.8"
+        "babenkoivan/scout-elasticsearch-driver": "^3.8",
+        "dewsign/nova-field-sortable": "^0.1.1"
     },
     "require-dev": {
         "squizlabs/php_codesniffer": ">=3.1"

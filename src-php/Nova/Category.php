@@ -9,20 +9,17 @@ use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Fields\Boolean;
 use Laravel\Nova\Fields\HasMany;
 use Laravel\Nova\Fields\MorphMany;
-use Naxon\NovaFieldSortable\Sortable;
 use Benjaminhirsch\NovaSlugField\Slug;
 use Laravel\Nova\Fields\BelongsToMany;
+use Dewsign\NovaFieldSortable\Sortable;
 use Dewsign\NovaBlog\Nova\BlogRepeaters;
 use Laravel\Nova\Http\Requests\NovaRequest;
 use Benjaminhirsch\NovaSlugField\TextWithSlug;
 use Maxfactor\Support\Webpage\Nova\MetaAttributes;
-use Naxon\NovaFieldSortable\Concerns\SortsIndexEntries;
 use Silvanite\NovaFieldCloudinary\Fields\CloudinaryImage;
 
 class Category extends Resource
 {
-    use SortsIndexEntries;
-
     public static $defaultSortField = 'sort_order';
 
     /**
@@ -66,13 +63,13 @@ class Category extends Resource
     public function fields(Request $request)
     {
         return [
-            ID::make()->sortable(),
-            Boolean::make('Active')->sortable()->rules('required', 'boolean'),
-            Boolean::make('Featured')->sortable()->rules('required', 'boolean'),
-            TextWithSlug::make('Name')->sortable()->rules('required_if:active,1', 'max:254')->slug('Slug'),
-            Slug::make('Slug')->sortable()->rules('required', 'alpha_dash', 'max:254'),
-            CloudinaryImage::make('Image'),
             Sortable::make('Sort Order', 'id'),
+            ID::make(),
+            Boolean::make('Active')->rules('required', 'boolean'),
+            Boolean::make('Featured')->rules('required', 'boolean'),
+            TextWithSlug::make('Name')->rules('required_if:active,1', 'max:254')->slug('Slug'),
+            Slug::make('Slug')->rules('required', 'alpha_dash', 'max:254'),
+            CloudinaryImage::make('Image'),
             HasMany::make('Articles'),
             MorphMany::make(__('Repeaters'), 'repeaters', BlogRepeaters::class),
             MetaAttributes::make(),
