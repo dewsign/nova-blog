@@ -66,7 +66,7 @@ class Article extends Resource
             ID::make()->sortable(),
             Boolean::make('Active')->sortable()->rules('required', 'boolean'),
             Boolean::make('Featured')->sortable()->rules('required', 'boolean'),
-            Number::make('Priority')->sortable()->rules('required', 'integer')->defaultValue(50),
+            Number::make('Priority')->sortable()->rules('required', 'integer'),
             TextWithSlug::make('Name')->sortable()->rules('required_if:active,1', 'max:254')->slug('Slug'),
             Slug::make('Slug')->sortable()->rules('required', 'alpha_dash', 'max:254')->hideFromIndex(),
             DateTime::make('Published Date')->sortable()->hideFromIndex()->rules('required_if:active,1', 'date'),
