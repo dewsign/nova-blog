@@ -1,11 +1,11 @@
-# Boilerplate repository for creating PHP Laravel and JS Vue NPM Packages
+# Blogging plugin for Laravel Nova
 
-This boilderplate is ready to be published to Packagist and NPM JS.
+## Installation
 
-## Usage
+`composer require dewsign/nova-blog`
 
-Simply fork this repository and customise. Search and Replace (case-sensitive) `Dewsign` and `NovaBlog` as well as `dewsign` and `nova-blog` to get started.
+`php artisan migrate`
 
-## Publishing
+Add the tool to your NovaServiceProvider
 
-Always use `npm version (major|minor|patch)` to publish new versions (even when working with PHP). This will automatically create the git tag for you which Packagist will then pick up for version publishing.
+`new Dewsign\NovaBlog\NovaBlogTool`
