@@ -55,7 +55,7 @@ class BlogController extends Controller
         // All recipes within current category
         $articles = $category
             ->articles()
-            ->active()
+            ->orderBy('published_date', 'desc')
             ->paginate(12);
 
         return View::first([
