@@ -12,13 +12,13 @@ use Laravel\Nova\Fields\HasMany;
 use Laravel\Nova\Fields\DateTime;
 use Laravel\Nova\Fields\Textarea;
 use Laravel\Nova\Fields\MorphMany;
+use Dewsign\NovaBlog\Nova\Category;
 use Benjaminhirsch\NovaSlugField\Slug;
 use Laravel\Nova\Fields\BelongsToMany;
 use Dewsign\NovaBlog\Nova\BlogRepeaters;
 use Laravel\Nova\Http\Requests\NovaRequest;
 use Benjaminhirsch\NovaSlugField\TextWithSlug;
 use Maxfactor\Support\Webpage\Nova\MetaAttributes;
-use Silvanite\NovaFieldCloudinary\Fields\CloudinaryImage;
 
 class Article extends Resource
 {
@@ -49,6 +49,16 @@ class Article extends Resource
 
     public static $group = 'Blog';
 
+    /**
+     * Get the logical group associated with the resource.
+     *
+     * @return string
+     */
+    public static function group()
+    {
+        return config('novablog.group', static::$group);
+    }
+
     public static function label()
     {
         return __('Articles');
@@ -70,9 +80,9 @@ class Article extends Resource
             TextWithSlug::make('Name')->sortable()->rules('required_if:active,1', 'max:254')->slug('Slug'),
             Slug::make('Slug')->sortable()->rules('required', 'alpha_dash', 'max:254')->hideFromIndex(),
             DateTime::make('Published Date')->sortable()->hideFromIndex()->rules('required_if:active,1', 'date'),
-            CloudinaryImage::make('Image'),
+            config('novablog.images.field')::make('Image')->disk(config('novablog.images.disk', 'public')),
             Textarea::make('Summary'),
-            BelongsToMany::make('Categories'),
+            BelongsToMany::make('Categories', 'categories', config('novablog.resources.category', Category::class)),
             MorphMany::make(__('Repeaters'), 'repeaters', BlogRepeaters::class),
             MetaAttributes::make(),
         ];

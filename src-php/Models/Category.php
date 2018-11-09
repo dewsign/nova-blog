@@ -38,7 +38,7 @@ class Category extends Model implements Sortable
      */
     public function articles()
     {
-        return $this->belongsToMany(Article::class, 'blog_article_blog_category');
+        return $this->belongsToMany(config('novablog.models.article', Article::class), 'blog_article_blog_category');
     }
 
     /**

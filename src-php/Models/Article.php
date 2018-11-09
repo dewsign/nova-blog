@@ -2,7 +2,6 @@
 
 namespace Dewsign\NovaBlog\Models;
 
-use ScoutElastic\Searchable;
 use Maxfactor\Support\Webpage\Model;
 use Illuminate\Support\Facades\Route;
 use Maxfactor\Support\Webpage\Traits\HasSlug;
@@ -11,55 +10,15 @@ use Maxfactor\Support\Model\Traits\HasActiveState;
 use Maxfactor\Support\Webpage\Traits\HasMetaAttributes;
 use Maxfactor\Support\Webpage\Traits\MustHaveCanonical;
 use Dewsign\NovaRepeaterBlocks\Traits\HasRepeaterBlocks;
-use Dewsign\NovaBlog\IndexConfigurators\BlogIndexConfigurator;
 
 class Article extends Model
 {
     use HasSlug;
-    use Searchable;
     use CanBeFeatured;
     use HasActiveState;
     use HasMetaAttributes;
     use HasRepeaterBlocks;
     use MustHaveCanonical;
-
-    protected $indexConfigurator = BlogIndexConfigurator::class;
-
-    // Mapping for a model fields.
-    protected $mapping = [
-        'properties' => [
-            'text' => [
-                'type' => 'text',
-                'fields' => [
-                    'raw' => [
-                        'type' => 'keyword',
-                    ]
-                ]
-            ],
-        ]
-    ];
-
-    /**
-     * Get the indexable data array for the model.
-     *
-     * @return array
-     */
-    public function toSearchableArray()
-    {
-        $this->repeaters;
-        $searchable = $this->toArray();
-
-        $searchable = array_except($searchable, [
-            'active',
-            'browser_title',
-            'h1',
-            'meta_description',
-            'nav_title',
-            'canonical',
-        ]);
-
-        return $searchable;
-    }
 
     /**
      * The attributes that are mass assignable.
@@ -86,7 +45,8 @@ class Article extends Model
      */
     public function categories()
     {
-        return $this->belongsToMany(Category::class, 'blog_article_blog_category')->ordered();
+        return $this->belongsToMany(config('novablog.models.category', Category::class), 'blog_article_blog_category')
+            ->ordered();
     }
 
     /**
@@ -97,21 +57,6 @@ class Article extends Model
     public function getPrimaryCategoryAttribute()
     {
         return $this->categories->first();
-    }
-
-    public function getFeaturedImageLargeAttribute()
-    {
-        if (!$this->image) {
-            return null;
-        }
-
-        return cloudinary_image($this->image, [
-            "width" => 800,
-            "height" => 450,
-            "crop" => "fill",
-            "gravity" => "auto",
-            "fetch_format" => "auto",
-        ]);
     }
 
     /**

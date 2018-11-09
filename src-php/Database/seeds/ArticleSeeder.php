@@ -18,12 +18,12 @@ class ArticleSeeder extends Seeder
      */
     public function run()
     {
-        factory(Article::class, 100)->create()->each(function ($article) {
+        factory(config('novablog.models.article', Article::class), 100)->create()->each(function ($article) {
             $article->repeaters()->saveMany(factory(Repeater::class, 5)->create()->each(function ($repeater) {
                 $repeater->type()->associate(factory(AvailableBlocks::random())->create())->save();
             }));
 
-            $article->categories()->attach(Category::inRandomOrder()->take(rand(1, 3))->get());
+            $article->categories()->attach(app(config('novablog.models.category', Category::class))::inRandomOrder()->take(rand(1, 3))->get());
         });
     }
 }

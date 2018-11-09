@@ -21,14 +21,14 @@ class NovaBlog
 
     private static function addCategories($sitemap)
     {
-        Category::active()->has('articles')->get()->each(function ($category) use ($sitemap) {
+        app(config('novablog.models.category', Category::class))::active()->has('articles')->get()->each(function ($category) use ($sitemap) {
             $sitemap->add(route('blog.list', $category));
         });
     }
 
     private static function addArticles($sitemap)
     {
-        Article::active()->has('categories')->get()->each(function ($article) use ($sitemap) {
+        app(config('novablog.models.article', Article::class))::active()->has('categories')->get()->each(function ($article) use ($sitemap) {
             $sitemap->add(route('blog.show', [$article->primaryCategory, $article]));
         });
     }

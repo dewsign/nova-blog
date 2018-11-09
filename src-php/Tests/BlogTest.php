@@ -19,18 +19,19 @@ abstract class BlogTest extends TestCase
     public function testBlogIndexShowsCategories()
     {
         $result = $this->get(route('blog.index'));
-        $result->assertSee(Category::active()->first()->navTitle);
+        $result->assertSee(app(config('novablog.models.category', Category::class))::active()->first()->navTitle);
     }
 
     public function testBlogCategoryIsAccessible()
     {
-        $result = $this->get(route('blog.list', Category::active()->first()));
+        $result = $this->get(route('blog.list', app(config('novablog.models.category', Category::class))::active()
+            ->first()));
         $result->assertOk();
     }
 
     public function testBlogArticleIsAccessible()
     {
-        $blog = Article::has('categories')->active()->first();
+        $blog = app(config('novablog.models.article', Article::class))::has('categories')->active()->first();
 
         $result = $this->get(route('blog.show', [$blog->primaryCategory, $blog]));
         $result->assertOk();

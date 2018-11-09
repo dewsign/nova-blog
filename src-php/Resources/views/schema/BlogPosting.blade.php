@@ -12,7 +12,7 @@
                 "name": "{{ config('app.name') }}",
                 "logo": {
                     "@type": "ImageObject",
-                    "url": "{{ asset('img/logos/fish-for-thought-logo.png') }}"
+                    "url": "{{ asset('') }}"
                 }
             }
         ],
@@ -23,7 +23,7 @@
                 "name": "{{ config('app.name') }}",
                 "logo": {
                     "@type": "ImageObject",
-                    "url": "{{ asset('img/logos/fish-for-thought-logo.png') }}"
+                    "url": "{{ asset('') }}"
                 }
             }
         ],

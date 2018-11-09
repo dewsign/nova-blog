@@ -17,7 +17,7 @@ class CategorySeeder extends Seeder
      */
     public function run()
     {
-        factory(Category::class, 10)->create()->each(function ($category) {
+        factory(config('novablog.models.category', Category::class), 10)->create()->each(function ($category) {
             $category->repeaters()->saveMany(factory(Repeater::class, 5)->create()->each(function ($repeater) {
                 $repeater->type()->associate(factory(AvailableBlocks::random())->create())->save();
             }));

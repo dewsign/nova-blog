@@ -21,11 +21,11 @@ class BlogController extends Controller
     */
     public function index()
     {
-        $articles = Article::includeRepeaters()->active()
+        $articles = app(config('novablog.models.article', Article::class))::includeRepeaters()->active()
             ->orderBy('published_date', 'desc')
             ->paginate(config('novablog.pageSize', 12));
 
-        $categories = Category::has('articles')
+        $categories = app(config('novablog.models.category', Category::class))::has('articles')
             ->active()
             ->get();
 
@@ -48,9 +48,9 @@ class BlogController extends Controller
      */
     protected function list(string $category)
     {
-        $category = Category::whereSlug($category)->firstOrFail();
+        $category = app(config('novablog.models.category', Category::class))::whereSlug($category)->firstOrFail();
 
-        $categories = Category::has('articles')->get();
+        $categories = app(config('novablog.models.category', Category::class))::has('articles')->get();
 
         // All recipes within current category
         $articles = $category
@@ -80,12 +80,13 @@ class BlogController extends Controller
      */
     public function show(string $category, string $article)
     {
-        $category = Category::whereSlug($category)->firstOrFail();
-        $article = Article::includeRepeaters()->whereSlug($article)->firstOrFail();
+        $category = app(config('novablog.models.category', Category::class))::whereSlug($category)->firstOrFail();
+        $article = app(config('novablog.models.article', Article::class))::includeRepeaters()
+            ->whereSlug($article)->firstOrFail();
 
-        $categories = Category::has('articles')->get();
+        $categories = app(config('novablog.models.category', Category::class))::has('articles')->get();
 
-        $articles = Article::inRandomOrder()->take(3)->get();
+        $articles = app(config('novablog.models.category', Category::class))::inRandomOrder()->take(3)->get();
 
         return View::first([
             'blog.show',
