@@ -11,13 +11,12 @@ use Laravel\Nova\Fields\HasMany;
 use Laravel\Nova\Fields\MorphMany;
 use Benjaminhirsch\NovaSlugField\Slug;
 use Laravel\Nova\Fields\BelongsToMany;
-use Dewsign\NovaFieldSortable\Sortable;
 use Dewsign\NovaFieldSortable\IsSorted;
+use Dewsign\NovaFieldSortable\Sortable;
 use Dewsign\NovaBlog\Nova\BlogRepeaters;
 use Laravel\Nova\Http\Requests\NovaRequest;
 use Benjaminhirsch\NovaSlugField\TextWithSlug;
 use Maxfactor\Support\Webpage\Nova\MetaAttributes;
-use Silvanite\NovaFieldCloudinary\Fields\CloudinaryImage;
 
 class Category extends Resource
 {
@@ -50,6 +49,16 @@ class Category extends Resource
 
     public static $group = 'Blog';
 
+    /**
+     * Get the logical group associated with the resource.
+     *
+     * @return string
+     */
+    public static function group()
+    {
+        return config('novablog.group', static::$group);
+    }
+
     public static function label()
     {
         return __('Categories');
@@ -70,8 +79,8 @@ class Category extends Resource
             Boolean::make('Featured')->rules('required', 'boolean'),
             TextWithSlug::make('Name')->rules('required_if:active,1', 'max:254')->slug('Slug'),
             Slug::make('Slug')->rules('required', 'alpha_dash', 'max:254'),
-            CloudinaryImage::make('Image'),
-            HasMany::make('Articles'),
+            config('novablog.images.field')::make('Image')->disk(config('novablog.images.disk', 'public')),
+            HasMany::make('Articles', 'articles', config('novablog.resources.article', Article::class)),
             MorphMany::make(__('Repeaters'), 'repeaters', BlogRepeaters::class),
             MetaAttributes::make(),
         ];

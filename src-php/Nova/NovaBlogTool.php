@@ -16,8 +16,8 @@ class NovaBlogTool extends NovaTool
     public function boot()
     {
         Nova::resources([
-            Article::class,
-            Category::class,
+            config('novablog.resources.article', Article::class),
+            config('novablog.resources.category', Category::class),
         ]);
     }
 }

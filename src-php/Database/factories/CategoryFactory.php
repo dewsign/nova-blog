@@ -3,7 +3,7 @@
 use Faker\Generator as Faker;
 use Dewsign\NovaBlog\Models\Category;
 
-$factory->define(Category::class, function (Faker $faker) {
+$factory->define(config('novablog.models.article', Category::class), function (Faker $faker) {
     return [
         'active' => $faker->boolean(90),
         'featured' => $faker->boolean(20),

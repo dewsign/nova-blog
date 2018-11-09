@@ -14,11 +14,13 @@ use Dewsign\NovaRepeaterBlocks\Repeaters\Common\Blocks\MarkdownBlock;
 
 class BlogRepeaters extends Repeater
 {
-    // One or more Nova Resources which use this Repeater
-    public static $morphTo = [
-        Article::class,
-        Category::class,
-    ];
+    public static function morphTo()
+    {
+        return [
+            config('novablog.resources.article', Article::class),
+            config('novablog.resources.category', Category::class),
+        ];
+    }
 
     // What type of repeater blocks should be made available
     public function types(Request $request)

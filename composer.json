@@ -16,11 +16,9 @@
         "laravel/framework": ">=5.0.0",
         "maxfactor/support": "^2.0.0",
         "benjaminhirsch/nova-slug-field": "^1.0",
-        "silvanite/nova-field-cloudinary": "^1.0",
-        "dewsign/nova-repeater-blocks": "^1.0.4",
+        "dewsign/nova-repeater-blocks": "^1.1.0",
         "epartment/nova-dependency-container": "^1.1",
         "silvanite/brandenburg": "^1.0",
-        "babenkoivan/scout-elasticsearch-driver": "^3.8",
         "dewsign/nova-field-sortable": "^0.1.1"
     },
     "require-dev": {
@@ -34,8 +32,7 @@
     "extra":{
         "laravel": {
             "providers": [
-                "Dewsign\\NovaBlog\\Providers\\PackageServiceProvider",
-                "Dewsign\\NovaBlog\\Providers\\AuthServiceProvider"
+                "Dewsign\\NovaBlog\\Providers\\PackageServiceProvider"
             ]
         }
     }
