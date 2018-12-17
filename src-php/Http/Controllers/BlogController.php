@@ -6,6 +6,7 @@ use Illuminate\Routing\Controller;
 use Dewsign\NovaBlog\Models\Article;
 use Illuminate\Support\Facades\View;
 use Dewsign\NovaBlog\Models\Category;
+use Illuminate\Support\Facades\Request;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
@@ -36,7 +37,7 @@ class BlogController extends Controller
         ->with('articles', $articles)
         ->with('categories', $categories)
         ->with('page', [
-            'canonical' => route('blog.index')
+            'canonical' => Request::fullUrl(),
         ]);
     }
 
