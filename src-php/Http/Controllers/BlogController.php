@@ -37,7 +37,7 @@ class BlogController extends Controller
         ->with('articles', $articles)
         ->with('categories', $categories)
         ->with('page', [
-            'canonical' => Request::fullUrl(),
+            'canonical' => Request::fullUrl()
         ]);
     }
 
