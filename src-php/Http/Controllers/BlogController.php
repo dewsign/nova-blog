@@ -35,10 +35,7 @@ class BlogController extends Controller
             'nova-blog::index',
         ])
         ->with('articles', $articles)
-        ->with('categories', $categories)
-        ->with('page', [
-            'canonical' => Request::fullUrl()
-        ]);
+        ->with('categories', $categories);
     }
 
     /**
