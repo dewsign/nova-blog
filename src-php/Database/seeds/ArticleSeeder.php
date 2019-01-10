@@ -20,7 +20,7 @@ class ArticleSeeder extends Seeder
     {
         factory(config('novablog.models.article', Article::class), 100)->create()->each(function ($article) {
             $article->repeaters()->saveMany(factory(Repeater::class, 5)->create()->each(function ($repeater) {
-                $repeater->type()->associate(factory(AvailableBlocks::random())->create())->save();
+                $repeater->type()->associate(factory(AvailableBlocks::random()::$model)->create())->save();
             }));
 
             $article->categories()->attach(app(config('novablog.models.category', Category::class))::inRandomOrder()->take(rand(1, 3))->get());

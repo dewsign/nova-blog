@@ -19,7 +19,7 @@ class CategorySeeder extends Seeder
     {
         factory(config('novablog.models.category', Category::class), 10)->create()->each(function ($category) {
             $category->repeaters()->saveMany(factory(Repeater::class, 5)->create()->each(function ($repeater) {
-                $repeater->type()->associate(factory(AvailableBlocks::random())->create())->save();
+                $repeater->type()->associate(factory(AvailableBlocks::random()::$model)->create())->save();
             }));
         });
     }
