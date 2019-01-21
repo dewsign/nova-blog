@@ -22,6 +22,7 @@ class BlogController extends Controller
     public function index()
     {
         $articles = app(config('novablog.models.article', Article::class))::includeRepeaters()->active()
+            ->has('categories')
             ->orderBy('published_date', 'desc')
             ->paginate(config('novablog.pageSize', 12));
 
