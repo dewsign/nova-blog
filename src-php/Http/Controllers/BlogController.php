@@ -83,7 +83,11 @@ class BlogController extends Controller
     {
         $category = app(config('novablog.models.category', Category::class))::whereSlug($category)->firstOrFail();
         $article = app(config('novablog.models.article', Article::class))::includeRepeaters()
-            ->whereSlug($article)->firstOrFail();
+            ->whereSlug($article)
+            ->whereHas('categories', function ($query) use ($category) {
+                $query->where('id', '=', $category->id);
+            })
+            ->firstOrFail();
 
         $categories = app(config('novablog.models.category', Category::class))::has('articles')->get();
 
