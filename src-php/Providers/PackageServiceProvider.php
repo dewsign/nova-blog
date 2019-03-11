@@ -148,8 +148,8 @@ class PackageServiceProvider extends ServiceProvider
     private function registerMorphmaps()
     {
         Relation::morphMap([
-            'novablog.article' => config('novablog.resources.article', Article::class),
-            'novablog.category' => config('novablog.resources.category', Category::class),
+            'novablog.article' => config('novablog.models.article', Article::class),
+            'novablog.category' => config('novablog.models.category', Category::class),
         ]);
     }
 
