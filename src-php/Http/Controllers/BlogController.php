@@ -37,7 +37,7 @@ class BlogController extends Controller
         ->with('articles', $articles)
         ->with('categories', $categories)
         ->with('page', [
-            'canonical' => route('blog.index')
+            'canonical' => \Maxfactor::urlWithQuerystring(route('blog.index'), $allowedParameters = 'page=[^1]')
         ]);
     }
 

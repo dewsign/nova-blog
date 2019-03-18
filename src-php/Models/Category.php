@@ -59,4 +59,14 @@ class Category extends Model implements Sortable
             ],
         ]);
     }
+
+    /**
+     * Set the canonical url including pagination querystring
+     *
+     * @return string
+     */
+    public function baseCanonical()
+    {
+        return \Maxfactor::urlWithQuerystring(url()->current(), $allowedParameters = 'page=[^1]');
+    }
 }

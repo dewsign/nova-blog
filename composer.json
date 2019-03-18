@@ -14,7 +14,7 @@
     "require": {
         "php": ">=7.0.0",
         "laravel/framework": ">=5.0.0",
-        "maxfactor/support": "^2.0.0",
+        "maxfactor/support": "^2.3.0",
         "benjaminhirsch/nova-slug-field": "^1.0",
         "dewsign/nova-repeater-blocks": "^1.2.0",
         "epartment/nova-dependency-container": "^1.1",
