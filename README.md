@@ -86,6 +86,7 @@ public function run()
 }
 ```
 
+
 ## Permissions
 
 A BlogPolicy is included, but not loaded by default, for [Brandenburg](https://github.com/Silvanite/brandenburg) / [Nova Tool](https://github.com/Silvanite/novatoolpermissions). Simply load the AuthServiceProvider from this package.
