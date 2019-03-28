@@ -4,7 +4,7 @@ Easily add a Blog with Articles and Categories in Nova using repeaters blocks fo
 
 ## Installation
 
-`composer require dewsign\nova-blog`
+`composer require dewsign/nova-blog`
 
 Run the migrations
 
