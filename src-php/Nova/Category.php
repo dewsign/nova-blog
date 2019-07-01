@@ -77,7 +77,7 @@ class Category extends Resource
             ID::make(),
             Boolean::make('Active')->rules('required', 'boolean'),
             Boolean::make('Featured')->rules('required', 'boolean'),
-            TextWithSlug::make('Name')->rules('required_if:active,1', 'max:254')->slug('Slug'),
+            TextWithSlug::make('Name')->rules('required_if:active,1', 'max:254')->slug('slug'),
             Slug::make('Slug')->rules('required', 'alpha_dash', 'max:254'),
             config('novablog.images.field')::make('Image')->disk(config('novablog.images.disk', 'public')),
             HasMany::make('Articles', 'articles', config('novablog.resources.article', Article::class)),
