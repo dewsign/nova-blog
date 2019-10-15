@@ -12,5 +12,6 @@ $factory->define(config('novablog.models.article', Article::class), function (Fa
         'image' => $faker->boolean(80) ? $faker->imageUrl($width = 640, $height = 480, 'business') : null,
         'summary' => $faker->realText(rand(70, 500)),
         'priority' => $faker->numberBetween(1, 100),
+        'published_date' => $faker->dateTimeBetween($startDate = '-1 month', $endDate = '+1 month'),
     ];
 });
