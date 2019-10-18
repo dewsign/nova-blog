@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Str;
 use Faker\Generator as Faker;
 use Dewsign\NovaBlog\Models\Category;
 
@@ -27,7 +28,7 @@ $factory->define(config('novablog.models.category', Category::class), function (
                 ]));
             })->all()
         ),
-        'slug' => str_slug($name),
+        'slug' => Str::slug($name),
         'image' => $faker->boolean(80) ? $faker->imageUrl($width = 640, $height = 480, 'business') : null,
     ];
 });
