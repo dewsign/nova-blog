@@ -2,6 +2,7 @@
 
 namespace Dewsign\NovaBlog\Models;
 
+use Illuminate\Support\Arr;
 use Maxfactor\Support\Webpage\Model;
 use Illuminate\Support\Facades\Route;
 use Maxfactor\Support\Webpage\Traits\HasSlug;
@@ -74,7 +75,7 @@ class Article extends Model
                 'url' => route('blog.index'),
             ],
             [
-                'name' => array_get($category ?? $this->primaryCategory, 'navTitle'),
+                'name' => Arr::get($category ?? $this->primaryCategory, 'navTitle'),
                 'url' => route('blog.list', [$category ?? $this->primaryCategory]),
             ],
             [
