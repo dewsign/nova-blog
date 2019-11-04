@@ -61,6 +61,17 @@ class Article extends Model
     }
 
     /**
+     * Only return articles that have been published.
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopePublished($query)
+    {
+        return $query->where('published_date', '<=', Carbon::now());
+    }
+
+    /**
      * Add required items to the breadcrumb seed
      *
      * @return array
