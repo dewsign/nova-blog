@@ -68,7 +68,7 @@ class Article extends Model
      */
     public function scopePublished($query)
     {
-        return $query->where('published_date', '<=', Carbon::today());
+        return $query->where('published_date', '<=', Carbon::now());
     }
 
     /**
