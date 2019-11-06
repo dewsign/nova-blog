@@ -43,4 +43,21 @@ class BlogPolicy
     {
         return $user->can('manageBlog', $model);
     }
+
+    public function viewInactive($user, $article)
+    {
+        if (config('maxfactor-support.canViewInactive')) {
+            return true;
+        }
+
+        if ($article->active) {
+            return true;
+        }
+
+        if (Gate::allows('viewNova')) {
+            return true;
+        }
+
+        return false;
+    }
 }
