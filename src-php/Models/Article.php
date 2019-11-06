@@ -2,6 +2,7 @@
 
 namespace Dewsign\NovaBlog\Models;
 
+use Carbon\Carbon;
 use Illuminate\Support\Arr;
 use Maxfactor\Support\Webpage\Model;
 use Illuminate\Support\Facades\Route;
