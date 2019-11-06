@@ -100,7 +100,6 @@ class BlogController extends Controller
         ->with('page', $article)
         ->with('articles', $articles)
         ->with('categories', $categories)
-        ->with('category', $category)
-        ->whenActive($article);
+        ->with('category', $category);
     }
 }
