@@ -57,6 +57,7 @@ class BlogController extends Controller
         $articles = $category
             ->articles()
             ->active()
+            ->published()
             ->orderBy('published_date', 'desc')
             ->paginate(config('novablog.pageSize', 12));
 
