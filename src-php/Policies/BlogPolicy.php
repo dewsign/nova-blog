@@ -44,7 +44,7 @@ class BlogPolicy
         return $user->can('manageBlog', $model);
     }
 
-    public function viewInactive($user, $article)
+    public function viewInactive($user = null, $article)
     {
         if (config('maxfactor-support.canViewInactive')) {
             return true;
