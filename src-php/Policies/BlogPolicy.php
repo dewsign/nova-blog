@@ -44,13 +44,13 @@ class BlogPolicy
         return $user->can('manageBlog', $model);
     }
 
-    public function viewInactive($user = null, $article)
+    public function viewInactive($user = null, $model)
     {
         if (config('maxfactor-support.canViewInactive')) {
             return true;
         }
 
-        if ($article->active) {
+        if ($model->active) {
             return true;
         }
 
