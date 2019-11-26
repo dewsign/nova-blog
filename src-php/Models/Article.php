@@ -6,6 +6,7 @@ use Carbon\Carbon;
 use Illuminate\Support\Arr;
 use Maxfactor\Support\Webpage\Model;
 use Illuminate\Support\Facades\Route;
+use Dewsign\LaravelAuthors\Traits\HasAuthors;
 use Maxfactor\Support\Webpage\Traits\HasSlug;
 use Maxfactor\Support\Model\Traits\CanBeFeatured;
 use Maxfactor\Support\Model\Traits\HasActiveState;
@@ -16,6 +17,7 @@ use Dewsign\NovaRepeaterBlocks\Traits\HasRepeaterBlocks;
 class Article extends Model
 {
     use HasSlug;
+    use HasAuthors;
     use CanBeFeatured;
     use HasActiveState;
     use HasMetaAttributes;

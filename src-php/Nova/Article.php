@@ -5,18 +5,16 @@ namespace Dewsign\NovaBlog\Nova;
 use Laravel\Nova\Resource;
 use Laravel\Nova\Fields\ID;
 use Illuminate\Http\Request;
-use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Fields\Number;
 use Laravel\Nova\Fields\Boolean;
-use Laravel\Nova\Fields\HasMany;
 use Laravel\Nova\Fields\DateTime;
 use Laravel\Nova\Fields\Textarea;
 use Laravel\Nova\Fields\MorphMany;
 use Dewsign\NovaBlog\Nova\Category;
+use Laravel\Nova\Fields\MorphToMany;
 use Benjaminhirsch\NovaSlugField\Slug;
 use Laravel\Nova\Fields\BelongsToMany;
 use Dewsign\NovaBlog\Nova\BlogRepeaters;
-use Laravel\Nova\Http\Requests\NovaRequest;
 use Benjaminhirsch\NovaSlugField\TextWithSlug;
 use Maxfactor\Support\Webpage\Nova\MetaAttributes;
 
@@ -83,6 +81,7 @@ class Article extends Resource
             config('novablog.images.field')::make('Image')->disk(config('novablog.images.disk', 'public')),
             Textarea::make('Summary'),
             BelongsToMany::make('Categories', 'categories', config('novablog.resources.category', Category::class)),
+            MorphToMany::make('Authors', 'authors', config('novablog.resources.author'))->searchable(),
             MorphMany::make(__('Repeaters'), 'repeaters', BlogRepeaters::class),
             MetaAttributes::make(),
         ];

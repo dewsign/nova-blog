@@ -2,6 +2,12 @@
     "name": "dewsign/nova-blog",
     "description": "Blogging plugin for Laravel Nova",
     "type": "package",
+    "keywords": [
+        "laravel",
+        "nova",
+        "blog",
+        "articles"
+    ],
     "license": "MIT",
     "authors": [
         {
@@ -14,12 +20,13 @@
     "require": {
         "php": ">=7.0.0",
         "laravel/framework": ">=5.0.0",
-        "maxfactor/support": "^2.6.10",
+        "maxfactor/support": "^2.6.11",
         "benjaminhirsch/nova-slug-field": "^1.0",
-        "dewsign/nova-repeater-blocks": "^1.2.0",
+        "dewsign/nova-repeater-blocks": "^1.8.4",
         "epartment/nova-dependency-container": "^1.1",
         "silvanite/brandenburg": "^1.0",
-        "dewsign/nova-field-sortable": "^0.2.0"
+        "dewsign/nova-field-sortable": "^0.2.0",
+        "dewsign/laravel-authors": "^1.0.0"
     },
     "require-dev": {
         "squizlabs/php_codesniffer": ">=3.1"
