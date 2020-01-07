@@ -18,6 +18,8 @@ use Dewsign\NovaBlog\Nova\BlogRepeaters;
 use Benjaminhirsch\NovaSlugField\TextWithSlug;
 use Maxfactor\Support\Webpage\Nova\MetaAttributes;
 
+use function PHPSTORM_META\map;
+
 class Article extends Resource
 {
     /**
@@ -79,6 +81,7 @@ class Article extends Resource
             Slug::make('Slug')->sortable()->rules('required', 'alpha_dash', 'max:254')->hideFromIndex(),
             DateTime::make('Published Date')->sortable()->hideFromIndex()->rules('required_if:active,1', 'date'),
             config('novablog.images.field')::make('Image')->disk(config('novablog.images.disk', 'public')),
+            Text::make('Image Alt')->rules('nullable', 'max:75'),
             Textarea::make('Summary'),
             BelongsToMany::make('Categories', 'categories', config('novablog.resources.category', Category::class)),
             MorphToMany::make('Authors', 'authors', config('novablog.resources.author'))->searchable(),
