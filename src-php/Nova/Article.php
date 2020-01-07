@@ -18,8 +18,6 @@ use Dewsign\NovaBlog\Nova\BlogRepeaters;
 use Benjaminhirsch\NovaSlugField\TextWithSlug;
 use Maxfactor\Support\Webpage\Nova\MetaAttributes;
 
-use function PHPSTORM_META\map;
-
 class Article extends Resource
 {
     /**
