@@ -14,11 +14,11 @@ class UpdateArticlesAndCategoriesAddImageAlt extends Migration
     public function up()
     {
         Schema::table('blog_categories', function (Blueprint $table) {
-            $table->text('image_alt')->nullable()->after('image');
+            $table->string('alternative_text')->nullable()->after('image');
         });
 
         Schema::table('blog_articles', function (Blueprint $table) {
-            $table->text('image_alt')->nullable()->after('image');
+            $table->string('alternative_text')->nullable()->after('image');
         });
     }
 
@@ -30,11 +30,11 @@ class UpdateArticlesAndCategoriesAddImageAlt extends Migration
     public function down()
     {
         Schema::table('blog_categories', function (Blueprint $table) {
-            $table->dropColumn('image_alt');
+            $table->dropColumn('alternative_text');
         });
 
         Schema::table('blog_articles', function (Blueprint $table) {
-            $table->dropColumn('image_alt');
+            $table->dropColumn('alternative_text');
         });
     }
 }
