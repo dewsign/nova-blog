@@ -79,6 +79,7 @@ class Article extends Resource
             Slug::make('Slug')->sortable()->rules('required', 'alpha_dash', 'max:254')->hideFromIndex(),
             DateTime::make('Published Date')->sortable()->hideFromIndex()->rules('required_if:active,1', 'date'),
             config('novablog.images.field')::make('Image')->disk(config('novablog.images.disk', 'public')),
+            Text::make('Alternative Text')->rules('nullable', 'max:254'),
             Textarea::make('Summary'),
             BelongsToMany::make('Categories', 'categories', config('novablog.resources.category', Category::class)),
             MorphToMany::make('Authors', 'authors', config('novablog.resources.author'))->searchable(),
