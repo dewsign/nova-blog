@@ -1,6 +1,6 @@
 {
     "name": "@dewsign/nova-blog",
-    "version": "1.3.2",
+    "version": "1.3.3",
     "description": "Blogging plugin for Laravel Nova",
     "main": "dist-js/index.js",
     "scripts": {
