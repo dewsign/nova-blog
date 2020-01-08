@@ -80,6 +80,7 @@ class Category extends Resource
             TextWithSlug::make('Name')->rules('required_if:active,1', 'max:254')->slug('slug'),
             Slug::make('Slug')->rules('required', 'alpha_dash', 'max:254'),
             config('novablog.images.field')::make('Image')->disk(config('novablog.images.disk', 'public')),
+            Text::make('Alternative Text')->rules('nullable', 'max:254')->hideFromIndex(),
             HasMany::make('Articles', 'articles', config('novablog.resources.article', Article::class)),
             MorphMany::make(__('Repeaters'), 'repeaters', BlogRepeaters::class),
             MetaAttributes::make(),
